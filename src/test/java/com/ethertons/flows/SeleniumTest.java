@@ -16,7 +16,7 @@ public class SeleniumTest {
 
     @AfterClass
     public static void tearDownTests() {
-//        driver.quit();
+        driver.quit();
     }
 
 }
