@@ -2,7 +2,9 @@ package com.ethertons.flows;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class SeleniumTest {
@@ -17,6 +19,15 @@ public class SeleniumTest {
     @AfterClass
     public static void tearDownTests() {
         driver.quit();
+    }
+
+    protected void login() {
+        WebElement userName = driver.findElement(By.name("j_username"));
+        userName.sendKeys("admin");
+        WebElement password = driver.findElement(By.name("j_password"));
+        password.sendKeys("dylan1889");
+        WebElement submit = driver.findElement(By.name("submit"));
+        submit.click();
     }
 
 }
