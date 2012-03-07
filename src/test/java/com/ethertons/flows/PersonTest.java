@@ -17,6 +17,8 @@ public class PersonTest extends SeleniumTest {
 
     @BeforeClass
     public static void setUpGlobalData() {
+        driver.get(Urls.HOST + ADD_NEW_PERSON_PATH);
+        login();
         addPerson("father", "gender2");
         addPerson("mother", "gender1");
     }
@@ -34,29 +36,68 @@ public class PersonTest extends SeleniumTest {
 
     @Test
     public void personDetailsShouldBeShownAfterAddingPerson() throws Exception {
+        addNewPerson();
+//        assertThat(driver.findElement(By.id("fullName")).getText(), is("Details for Martin Etherton"));
+//        assertThat(driver.findElement(By.id("gender")).getText(), is("Male"));
+//        assertThat(driver.findElement(By.id("father")).getText(), is("Samuel Etherton"));
+//        assertThat(driver.findElement(By.id("mother")).getText(), is("Nora Wilkinson"));
+        assertThat(driver.findElement(By.id("birthDate")).getText(), is("Date of Birth:\nMar 4, 1963"));
+    }
+
+    @Test
+    public void personDetailsShouldBeChangedAfterEditingPerson() throws Exception {
+        gotoEditBirthForm();
+        WebElement firstName = driver.findElement(By.id("firstName"));
+        firstName.sendKeys("MartinChange");
+        WebElement birthDate = driver.findElement(By.id("birthDate"));
+        birthDate.clear();
+        birthDate.sendKeys("03/04/1963");
+        WebElement submit = driver.findElement(By.id("submit"));
+        submit.click();
+        assertThat(driver.findElement(By.id("fullName")).getText(), is("Details for MartinMartinChange Etherton"));
+    }
+
+    @Test
+    public void editBirthFormShouldHaveTitleEditBirth() {
+        gotoEditBirthForm();
+        assertThat(driver.findElement(By.className("innercontentmiddleheader")).getText(), is("Edit Birth") );
+    }
+
+    private void gotoEditBirthForm() {
+        addNewPerson();
+        String currentUrl = driver.getCurrentUrl();
+        int personId = extractPersonIdFrom(currentUrl);
+        driver.get(Urls.HOST + "/persons/" + personId + "/edit");
+    }
+
+
+    private int extractPersonIdFrom(String currentUrl) {
+        String[] urlParts = currentUrl.split("/");
+        return Integer.parseInt(urlParts[4]);
+    }
+
+    private void addNewPerson() {
         WebElement firstName = driver.findElement(By.id("firstName"));
         firstName.sendKeys("Martin");
-        WebElement surname = driver.findElement(By.xpath("//select[@id='surname']/option[normalize-space(text())='etherton']"));
+        WebElement surname = driver.findElement(By.xpath("//select[@id='surname']/option[normalize-space(text())='Etherton']"));
         surname.click();
-        WebElement father = driver.findElement(By.xpath("//select[@id='father']/option[normalize-space(text())='father etherton']"));
+        WebElement father = driver.findElement(By.xpath("//select[@id='father']/option[normalize-space(text())='Samuel Etherton']"));
         father.click();
-        WebElement mother = driver.findElement(By.xpath("//select[@id='mother']/option[normalize-space(text())='mother etherton']"));
+        WebElement mother = driver.findElement(By.xpath("//select[@id='mother']/option[normalize-space(text())='Nora Wilkinson']"));
         mother.click();
         WebElement gender = driver.findElement(By.id("gender2"));
         gender.click();
+        WebElement birthDate = driver.findElement(By.id("birthDate"));
+        birthDate.sendKeys("04/03/1963");
         WebElement submit = driver.findElement(By.id("submit"));
         submit.click();
-        assertThat(driver.findElement(By.id("firstName")).getText(), is("Martin"));
-        assertThat(driver.findElement(By.id("gender")).getText(), is("Male"));
-        assertThat(driver.findElement(By.id("father")).getText(), is("father etherton"));
-        assertThat(driver.findElement(By.id("mother")).getText(), is("mother etherton"));
     }
 
     private static void addPerson(String firstNameValue, String genderSelection) {
         driver.get(Urls.HOST + ADD_NEW_PERSON_PATH);
         WebElement firstName = driver.findElement(By.id("firstName"));
         firstName.sendKeys(firstNameValue);
-        WebElement surname = driver.findElement(By.xpath("//select[@id='surname']/option[normalize-space(text())='etherton']"));
+        WebElement surname = driver.findElement(By.xpath("//select[@id='surname']/option[normalize-space(text())='Etherton']"));
         surname.click();
         WebElement gender = driver.findElement(By.id(genderSelection));
         gender.click();

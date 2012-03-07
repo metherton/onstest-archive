@@ -16,7 +16,9 @@ public class PersonListTest extends SeleniumTest {
     @Test
     public void listOfPersonsShouldBeShown() throws Exception {
         driver.get(Urls.HOST + "/persons");
-        List<WebElement> persons = driver.findElements(By.id("person"));
+        List<WebElement> persons = driver.findElements(By.id("personFullName"));
         assertThat(persons.size(), is(Matchers.greaterThan(0)));
+        WebElement welcomeHeader = driver.findElement(By.id("welcome"));
+        assertThat(welcomeHeader.getText(), is("Etherton One Name Study"));
     }
 }

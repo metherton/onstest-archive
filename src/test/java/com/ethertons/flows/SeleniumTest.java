@@ -21,13 +21,17 @@ public class SeleniumTest {
         driver.quit();
     }
 
-    protected void login() {
-        WebElement userName = driver.findElement(By.name("j_username"));
-        userName.sendKeys("admin");
-        WebElement password = driver.findElement(By.name("j_password"));
-        password.sendKeys("dylan1889");
-        WebElement submit = driver.findElement(By.name("submit"));
-        submit.click();
+    protected static void login() {
+        try {
+            WebElement userName = driver.findElement(By.name("j_username"));
+            userName.sendKeys("admin");
+            WebElement password = driver.findElement(By.name("j_password"));
+            password.sendKeys("dylan1889");
+            WebElement submit = driver.findElement(By.name("submit"));
+            submit.click();
+        }   catch (Exception e) {
+            //
+        }
     }
 
 }
