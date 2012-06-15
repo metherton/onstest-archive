@@ -3,7 +3,6 @@ package com.ethertons.flows;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-import com.ethertons.constants.Urls;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -34,7 +33,7 @@ public class TreeTest extends SeleniumTest {
     public void treeDetailsShouldBeShownAfterAddingTree() throws Exception {
         WebElement description = driver.findElement(By.name("description"));
         description.sendKeys("test tree 1");
-        WebElement person = driver.findElement(By.xpath("//select[@id='person']/option[normalize-space(text())='Samuel Etherton']"));
+        WebElement person = driver.findElement(By.xpath("//select[@id='person']/option[normalize-space(text())='Samuel James Etherton']"));
         person.click();
         WebElement submit = driver.findElement(By.id("submit"));
         submit.click();

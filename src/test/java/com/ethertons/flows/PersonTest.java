@@ -1,15 +1,15 @@
 package com.ethertons.flows;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
+
 import com.ethertons.constants.Urls;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
 
 public class PersonTest extends SeleniumTest {
 
@@ -37,10 +37,6 @@ public class PersonTest extends SeleniumTest {
     @Test
     public void personDetailsShouldBeShownAfterAddingPerson() throws Exception {
         addNewPerson();
-//        assertThat(driver.findElement(By.id("fullName")).getText(), is("Details for Martin Etherton"));
-//        assertThat(driver.findElement(By.id("gender")).getText(), is("Male"));
-//        assertThat(driver.findElement(By.id("father")).getText(), is("Samuel Etherton"));
-//        assertThat(driver.findElement(By.id("mother")).getText(), is("Nora Wilkinson"));
         assertThat(driver.findElement(By.id("birthDate")).getText(), is("Date of Birth:\nMar 4, 1963"));
     }
 
@@ -81,7 +77,7 @@ public class PersonTest extends SeleniumTest {
         firstName.sendKeys("Martin");
         WebElement surname = driver.findElement(By.xpath("//select[@id='surname']/option[normalize-space(text())='Etherton']"));
         surname.click();
-        WebElement father = driver.findElement(By.xpath("//select[@id='father']/option[normalize-space(text())='Samuel Etherton']"));
+        WebElement father = driver.findElement(By.xpath("//select[@id='father']/option[normalize-space(text())='Samuel James Etherton']"));
         father.click();
         WebElement mother = driver.findElement(By.xpath("//select[@id='mother']/option[normalize-space(text())='Nora Wilkinson']"));
         mother.click();

@@ -5,3 +5,5 @@
 .project
 *.iml
 target/*
+.idea/*
+lib/*
