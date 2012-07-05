@@ -10,16 +10,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class TreeViewPage {
+public class TreeViewPage extends OnsPage {
 
     private static final String TREE_VIEW_URL = Urls.HOST + "/trees/";
-    private final WebDriver driver;
+    private final Person selectedPerson;
 
-    public TreeViewPage(WebDriver driver) {
-        this.driver = driver;
+    public TreeViewPage(WebDriver driver, Person selectedPerson) {
+        super(driver);
+        this.selectedPerson = selectedPerson;
     }
 
-    public TreeViewPage loadTreeFor(Person selectedPerson) {
+    @Override
+    public TreeViewPage load() {
         driver.get(TREE_VIEW_URL + selectedPerson.getId() + "/view");
         return this;
     }

@@ -18,27 +18,27 @@ public class TreeViewTest extends SeleniumTest {
     @Test
     public void familyTreeShouldBeShown() {
         Person father = new Person();
-        father.setId(169);
-        father.setFullname("Sydney Arthur Etherton");
+        father.setId(5);
+        father.setFullname("Sydney Arthur (Jr) Etherton");
         Person mother = new Person();
-        mother.setId(171);
+        mother.setId(9);
         mother.setFullname("Nora Wilkinson");
         Person firstSon = new Person();
-        firstSon.setId(170);
-        firstSon.setFullname("Mark Etherton");
+        firstSon.setId(8);
+        firstSon.setFullname("Mark Howard Etherton");
         Person secondSon = new Person();
-        secondSon.setId(172);
+        secondSon.setId(6);
         secondSon.setFullname("Martin Etherton");
         Person secondSonWife = new Person();
-        secondSonWife.setId(176);
+        secondSonWife.setId(10);
         secondSonWife.setFullname("Erna De Roo");
         Person firstDaughter = new Person();
-        firstDaughter.setId(173);
+        firstDaughter.setId(13);
         firstDaughter.setFullname("Rhonda Etherton");
         Person firstSonForSecondSon = new Person();
-        firstSonForSecondSon.setId(175);
+        firstSonForSecondSon.setId(7);
         firstSonForSecondSon.setFullname("Dylan Etherton");
-        TreeViewPage treeViewPage = new TreeViewPage(driver).loadTreeFor(secondSon);
+        TreeViewPage treeViewPage = new TreeViewPage(driver, secondSon).load();
         List<Person> firstGeneration = newArrayList();
         firstGeneration.add(father);
         firstGeneration.add(mother);
@@ -59,12 +59,14 @@ public class TreeViewTest extends SeleniumTest {
     @Test
     public void unknownParentsShouldBeShownIfTheyAreNotKnown() throws Exception {
         Person firstSon = new Person();
-        firstSon.setId(169);
+        firstSon.setId(5);
         Person unknownFather = new Person();
-        unknownFather.setFullname("Sydney Arthur (sr) Etherton");
+        unknownFather.setFullname("Sydney Arthur (Sr) Etherton");
+        unknownFather.setId(4);
         Person unknownMother = new Person();
         unknownMother.setFullname("Mary Bell");
-        TreeViewPage treeViewPage = new TreeViewPage(driver).loadTreeFor(firstSon);
+        unknownMother.setId(14);
+        TreeViewPage treeViewPage = new TreeViewPage(driver, firstSon).load();
         List<Person> firstGeneration = newArrayList();
         firstGeneration.add(unknownFather);
         firstGeneration.add(unknownMother);
@@ -75,9 +77,9 @@ public class TreeViewTest extends SeleniumTest {
     @Test
     public void personShouldShowInSecondGenerationIfParentsNotKnown() throws Exception {
         Person firstSon = new Person();
-        firstSon.setId(169);
-        firstSon.setFullname("Sydney Arthur Etherton");
-        TreeViewPage treeViewPage = new TreeViewPage(driver).loadTreeFor(firstSon);
+        firstSon.setId(5);
+        firstSon.setFullname("Sydney Arthur (Jr) Etherton");
+        TreeViewPage treeViewPage = new TreeViewPage(driver, firstSon).load();
         List<Person> secondGeneration = newArrayList();
         secondGeneration.add(firstSon);
         List<Person> secondGenerationReturned = treeViewPage.secondGeneration();
@@ -87,11 +89,11 @@ public class TreeViewTest extends SeleniumTest {
     @Test
     public void childrenShouldBeShownWhenFemaleIsActivePerson() throws Exception {
         Person secondSonWife = new Person();
-        secondSonWife.setId(174);
+        secondSonWife.setId(10);
         secondSonWife.setFullname("Erna De Roo");
-        TreeViewPage treeViewPage = new TreeViewPage(driver).loadTreeFor(secondSonWife);
+        TreeViewPage treeViewPage = new TreeViewPage(driver, secondSonWife).load();
         Person firstSonForSecondSon = new Person();
-        firstSonForSecondSon.setId(175);
+        firstSonForSecondSon.setId(7);
         firstSonForSecondSon.setFullname("Dylan Etherton");
         List<Person> thirdGeneration = newArrayList();
         thirdGeneration.add(firstSonForSecondSon);

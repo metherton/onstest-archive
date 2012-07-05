@@ -7,15 +7,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class TreeListPage {
+public class TreeListPage extends OnsPage {
 
     private static final String TREE_LIST_URL = Urls.HOST + "/trees";
-    private final WebDriver driver;
 
     public TreeListPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
+    @Override
     public TreeListPage load() {
         driver.get(TREE_LIST_URL);
         return this;
