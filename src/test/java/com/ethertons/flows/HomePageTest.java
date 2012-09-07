@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import com.ethertons.pages.HomePage;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -12,11 +13,21 @@ import org.junit.Test;
  */
 public class HomePageTest extends SeleniumTest {
 
+    private HomePage homePage;
+
+    @Before
+    public void setUp() throws Exception {
+        homePage = new HomePage(driver).load();
+    }
+
     @Test
     public void homePageShouldShowWelcomeMessage() {
-        HomePage homePage = new HomePage(driver).load();
         assertThat(homePage.getWelcomeMessage(), is("Welcome to the Etherton One Name Study") );
         assertThat(homePage.getWebSiteAuthorMessage() , is("Site is maintained by Martin Etherton"));
     }
 
+    @Test
+    public void uploadGedcomLinkShouldBeShownInLeftHandMenu() throws Exception {
+        assertThat(homePage.showGedcoms(), is("Gedcoms"));
+    }
 }

@@ -23,4 +23,8 @@ public class HomePage extends OnsPage {
     public String getWebSiteAuthorMessage() {
         return driver.findElement(By.id("website-author")).getText();
     }
+
+    public String showGedcoms() {
+        return driver.findElement(By.id("upload-gedcom")).getText();
+    }
 }
