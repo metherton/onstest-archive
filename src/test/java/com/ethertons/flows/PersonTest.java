@@ -69,7 +69,7 @@ public class PersonTest extends SeleniumTest {
 
     private int extractPersonIdFrom(String currentUrl) {
         String[] urlParts = currentUrl.split("/");
-        return Integer.parseInt(urlParts[4]);
+        return Integer.parseInt(urlParts[5]);
     }
 
     private void addNewPerson() {

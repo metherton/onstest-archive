@@ -10,17 +10,21 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.ethertons.constants.Urls;
+
 public class TreeTest extends SeleniumTest {
+
+    private static final String ADD_NEW_TREE_PATH = "/trees/new";
 
     @BeforeClass
     public static void setUpTest() {
-        driver.get("http://localhost:8080/trees/new");
+        driver.get(Urls.HOST + ADD_NEW_TREE_PATH);
         login();
     }
 
     @Before
     public void setUp() {
-        driver.get("http://localhost:8080/trees/new");
+        driver.get(Urls.HOST + ADD_NEW_TREE_PATH);
     }
 
     @Test
