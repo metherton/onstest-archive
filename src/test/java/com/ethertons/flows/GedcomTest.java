@@ -41,6 +41,7 @@ public class GedcomTest extends SeleniumTest {
         WebElement submit = driver.findElement(By.id("submit"));
         submit.click();
         assertThat(driver.findElement(By.id("title")).getText(), CoreMatchers.is("test gedcom file"));
+        assertThat(driver.findElement(By.xpath("//a[@class='mergegedcom']")).getText(), is("Merge Gedcom Contents"));
     }
     
     
