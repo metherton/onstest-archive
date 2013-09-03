@@ -24,6 +24,7 @@ public class HomePageTest extends SeleniumTest {
     public void homePageShouldShowWelcomeMessage() {
         assertThat(homePage.getWelcomeMessage(), is("Welcome to the Etherton One Name Study") );
         assertThat(homePage.getWebSiteAuthorMessage() , is("Site is maintained by Martin Etherton"));
+        assertThat(homePage.inTheNewsFeedHasElements(), is(true));
     }
 
     @Test

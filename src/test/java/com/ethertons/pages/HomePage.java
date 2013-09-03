@@ -27,4 +27,8 @@ public class HomePage extends OnsPage {
     public String showGedcoms() {
         return driver.findElement(By.id("upload-gedcom")).getText();
     }
+
+    public Boolean inTheNewsFeedHasElements() {
+        return driver.findElements(By.xpath("//div[@class='newsItem']")).size() > 0;
+    }
 }
